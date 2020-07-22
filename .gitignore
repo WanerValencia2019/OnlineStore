@@ -1,0 +1,7 @@
+__pycache__/
+db.sqlite3
+apps/products/__pycache__/
+apps/products/__migrations__/
+apps/users/__pycache__/
+apps/users/__migrations__/
+store/__pycache__/
