@@ -1,0 +1,49 @@
+{% extends 'base.html' %} {% load static %}
+
+<head>
+    {% block styles %}
+    <link rel=stylesheet href="{% static './css/login.css' %}"> {% endblock styles %}
+</head>
+{% block aside %} {% endblock aside %} {% block content %}
+
+<section class="container mt-2  h-100">
+    <div class="d-flex justify-content-center  h-100">
+        <div class="">
+            <form class="p-5 form-group  bg-white shadow rounded " method="post">
+                {% csrf_token %}
+                <h3 class="text-center mb-2">Registrarse</h3>
+                <div class="row form-group">
+                    <div class="col">
+                        <label for="{{form.first_name.id_for_label}}">{{form.first_name.label}}</label> {{form.first_name}}
+                    </div>
+                    <div class="col">
+                        <label for="{{form.last_name.id_for_label}}">{{form.last_name.label}}</label> {{form.last_name}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{form.username.id_for_label}}">{{form.username.label}}</label> {{form.username}}
+                </div>
+                <div class="form-group">
+                    <label for="{{form.email.id_for_label}}">{{form.email.label}}</label> {{form.email}}
+                </div>
+                <div class="row form-group">
+                    <div class="col">
+                        <label for="{{form.password.id_for_label}}">{{form.password.label}}</label> {{form.password}}
+                    </div>
+                    <div class="col">
+                        <label for="{{form.password_confirm.id_for_label}}">{{form.password_confirm.label}}</label> {{form.password_confirm}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input" checked=""> <div class="custom-control-label"> I am agree with <a href="#">terms and contitions</a>  </div> </label>
+                </div>
+                <div class="d-flex justify-content-center  mt-3 login_container">
+                    <button type="submit" class="btn  btn-outline-succes login_btn">Registrarme</button>
+                </div>
+                <p class="text-center mt-4">Ya tienes una cuenta? <a href={% url 'login' %}>Iniciar sesión</a></p>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock content %} {% block footer %} {% endblock footer %}

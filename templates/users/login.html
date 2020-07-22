@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% load static %}
+
+<head>
+    {% block styles %}
+    <link rel=stylesheet href="{% static './css/login.css' %}"> {% endblock styles %}
+
+</head>
+{% block aside %} {% endblock aside %} {% block content %}
+
+<div class="container mt-n5 h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="user_card bg-light">
+            <div class="d-flex justify-content-center">
+                <div class="brand_logo_container ">
+                    <img src="{% static './images/logo.png' %}" class="brand_logo bg-light shadow" alt="Logo">
+                </div>
+            </div>
+            <div class="d-flex justify-content-center form_container">
+                <form method='POST'>
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" name="username" class="form-control input_user" value="" placeholder="Usuario o correo electrónico">
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-key"></i></span>
+                        </div>
+                        <input type="password" name="password" class="form-control input_pass" value="" placeholder="Contraseña">
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customControlInline">
+                            <label class="custom-control-label" for="customControlInline">Remember me</label>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3 login_container">
+                        <button type="submit" class="btn btn-outline-succes login_btn">Iniciar Sesión</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="mt-4">
+                <div class="d-flex justify-content-center links nav-link">
+                    No tienes una cuenta? <a href={% url 'register' %} class="ml-2">Registrate</a>
+                </div>
+                <div class="d-flex justify-content-center links">
+                    <a href={% url 'password_reset' %}>Has olvidado tu contraseña?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %} {% block footer %} {% endblock footer %}
