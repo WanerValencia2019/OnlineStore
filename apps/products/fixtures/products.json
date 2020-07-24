@@ -1,0 +1,226 @@
+[
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "title": "Papaya",
+        "image": "products/papaya.jpg",
+        "description": "Fresca y deliciosa",
+        "unit": "kg",
+        "price": "2700.00",
+        "slug": "papaya",
+        "created_at": "2020-07-22T20:59:14.097Z",
+        "updated_At": "2020-07-24T01:09:00.007Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "title": "Guanabana",
+        "image": "products/guanabana.jpg",
+        "description": "Fresca y deliciosa",
+        "unit": "kg",
+        "price": "4500.00",
+        "slug": "guanabana",
+        "created_at": "2020-07-22T21:00:41.823Z",
+        "updated_At": "2020-07-24T01:08:33.997Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "title": "Guayaba dulce",
+        "image": "products/guayaba-dulce.jpeg",
+        "description": "Fresca y deliciosa",
+        "unit": "kg",
+        "price": "1000.00",
+        "slug": "guayaba-dulce",
+        "created_at": "2020-07-22T21:00:59.987Z",
+        "updated_At": "2020-07-24T01:08:41.130Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "title": "Fresa",
+        "image": "products/fresa.jpeg",
+        "description": "Fresca y deliciosa",
+        "unit": "kg",
+        "price": "5000.00",
+        "slug": "fresa",
+        "created_at": "2020-07-22T21:01:43.188Z",
+        "updated_At": "2020-07-24T01:08:26.196Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+        "title": "Manzana roja",
+        "image": "products/manzana-roja.jpeg",
+        "description": "Fresca y deliciosa",
+        "unit": "libras",
+        "price": "1200.00",
+        "slug": "manzana-roja",
+        "created_at": "2020-07-22T21:18:03.664Z",
+        "updated_At": "2020-07-24T01:08:52.098Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+        "title": "Aceite de girasol x500",
+        "image": "products/aceiteGirasol500.webp",
+        "description": "Rico y delicioso",
+        "unit": "ml",
+        "price": "12500.00",
+        "slug": "aceite-de-girasol-x500",
+        "created_at": "2020-07-24T00:59:37.509Z",
+        "updated_At": "2020-07-24T01:08:19.559Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+        "title": "Aceite Gourmet x500",
+        "image": "products/aceiteGourmetx500.webp",
+        "description": "Rico y delicioso",
+        "unit": "ml",
+        "price": "20200.00",
+        "slug": "aceite-gourmet-x500",
+        "created_at": "2020-07-24T01:10:11.625Z",
+        "updated_At": "2020-07-24T01:10:11.625Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+        "title": "Arroz Diana",
+        "image": "products/arroz.webp",
+        "description": "La frescura de un buen arroz para tu hogar",
+        "unit": "arroba",
+        "price": "45000.00",
+        "slug": "arroz-diana",
+        "created_at": "2020-07-24T01:11:59.367Z",
+        "updated_At": "2020-07-24T01:11:59.367Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+        "title": "Alitas de pollo  (Pre-cocidas)",
+        "image": "products/alitaPollo.webp",
+        "description": "Rico y delicios",
+        "unit": "kg",
+        "price": "14600.00",
+        "slug": "alitas-de-pollo-pre-cocidas",
+        "created_at": "2020-07-24T01:13:24.431Z",
+        "updated_At": "2020-07-24T01:25:59.805Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+        "title": "Cilantro",
+        "image": "products/cilantro.jpg",
+        "description": "La frescura del campo, en tu mesa",
+        "unit": "kg",
+        "price": "1300.00",
+        "slug": "cilantro",
+        "created_at": "2020-07-24T01:15:13.500Z",
+        "updated_At": "2020-07-24T01:15:13.500Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+        "title": "Granola lite",
+        "image": "products/granola.jpg",
+        "description": "Disfruta de un alimento rico, saludable y que te ayudar\u00e1 a estar fuerte",
+        "unit": "500 gramos",
+        "price": "5600.00",
+        "slug": "granola-lite",
+        "created_at": "2020-07-24T01:18:11.714Z",
+        "updated_At": "2020-07-24T01:18:11.714Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+        "title": "Granola 9 semillas",
+        "image": "products/granola9semillas.png",
+        "description": "Disfruta de esta mezcla de explosi\u00f3n y sabor, adem\u00e1s de saludable.",
+        "unit": "1kg",
+        "price": "11500.00",
+        "slug": "granola-9-semillas",
+        "created_at": "2020-07-24T01:19:10.693Z",
+        "updated_At": "2020-07-24T01:19:10.694Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+        "title": "Lentejas africanas",
+        "image": "products/lentejas.png",
+        "description": "Lo mejor del mercado",
+        "unit": "1 libra",
+        "price": "4000.00",
+        "slug": "lentejas-africanas",
+        "created_at": "2020-07-24T01:19:55.460Z",
+        "updated_At": "2020-07-24T01:19:55.460Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+        "title": "Lomo de res",
+        "image": "products/lomoRes.jpeg",
+        "description": "Rico y saludable",
+        "unit": "1 libra",
+        "price": "4500.00",
+        "slug": "lomo-de-res",
+        "created_at": "2020-07-24T01:21:15.363Z",
+        "updated_At": "2020-07-24T01:21:15.364Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+        "title": "Pollo bucanero (Entero)",
+        "image": "products/polloBucanero.jpg",
+        "description": "Fresco, rico y saludable",
+        "unit": "kg",
+        "price": "23000.00",
+        "slug": "pollo-bucanero-entero",
+        "created_at": "2020-07-24T01:22:29.768Z",
+        "updated_At": "2020-07-24T01:22:29.768Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 16,
+    "fields": {
+        "title": "Tomate",
+        "image": "products/tomate.jpg",
+        "description": "La frescura del campo, en tu mesa",
+        "unit": "1 libra",
+        "price": "2000.00",
+        "slug": "tomate",
+        "created_at": "2020-07-24T01:22:57.675Z",
+        "updated_At": "2020-07-24T01:22:57.675Z"
+    }
+}
+]
