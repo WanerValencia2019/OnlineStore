@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
+from django.db.models import Q
+
+
 from .models import Product
 # Create your views here.
 
@@ -36,7 +39,9 @@ class SearchProductView(ListView):
 
 
     def get_queryset(self):
-        queryset = Product.objects.filter(title__icontains=self.request.GET['search'])
+        search = self.request.GET['search']
+        queryset = Product.objects.filter(Q(title__icontains=search) | Q(category_products__title__icontains=search))
+        
         return queryset
 
     def get_context_data(self, **kwargs):
