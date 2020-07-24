@@ -10,6 +10,9 @@ class Category(models.Model):
     def __str__(self):
         return self.title
     
+    def count(self):
+        return len(self.products.all())
+
     class Meta:
         verbose_name='Categoría'
         verbose_name_plural = 'Categorías'
