@@ -20,12 +20,9 @@
                     </div>
                     </form>
                     <ul class="list-menu list-unstyled ">
-                        <li><a class="text-body text-decoration-none " href="#">Frutas </a></li>
-                        <li><a class="text-body text-decoration-none" href="#">Verduras  </a></li>
-                        <li><a class="text-body text-decoration-none" href="#">Carnes</a></li>
-                        <li><a class="text-body text-decoration-none" href="#">Lacteos</a></li>
-                        <li><a class="text-body text-decoration-none" href="#">Granos y harinas</a></li>
-                        <li><a class="text-body text-decoration-none" href="#">Aseo del hogar</a></li>
+                      {% for category in categories %}
+                      <li><a class="text-body text-decoration-none " href="{% url 'products:search'%}?search={{category.title}}">{{category.title}} <span class="badge badge-secondary">{{category.count}}</span></a></li>
+                      {% endfor %}                        
                     </ul>
     
                 </div> <!-- card-body.// -->

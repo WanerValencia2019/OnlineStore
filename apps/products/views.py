@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 from django.db.models import Q
 
+from apps.category.models import Category
+
 
 from .models import Product
 # Create your views here.
@@ -27,6 +29,12 @@ class StoreView(ListView):
     template_name = 'products/store.html'
     context_object_name = 'products'
 
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+
+        return  context
+
 
 class ProductDetail(DetailView):
     model = Product
@@ -47,6 +55,7 @@ class SearchProductView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["query"] = self.request.GET['search'] 
+        context['categories'] = Category.objects.all()
         return context
     
 
