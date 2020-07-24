@@ -12,5 +12,27 @@
 
 </head>
 
-<h4>{{product}}</h4>
+<section class="container row d-flex mt-3">
+    <div class="col-lg-6 ">
+        <div class="" style="width: 100%;">
+            <img class="img-thumbnail" src="{{product.image.url}}" alt="" />
+        </div>
+    </div>
+    <div class="col-lg-6 container d-flex flex-column">
+        <h3 class="display-4 ">{{product.title}}</h3>
+        <div class="mb-2">
+            <span class="font-weight-bold h3">${{product.price}}</span>
+            <i class="text-muted">{{product.unit}}</i>
+        </div>
+        <div class="h5">
+            <span class="text-muted text-body">
+                {{product.description}}
+            </span>
+        </div>
+        <div class="row d-flex p-3 align-self-end">
+            <a href="#" class="btn  btn-primary"> Comprar </a>
+            <a href="#" class="btn ml-3  btn-outline-primary"> <span class="text">Agregar al carrito</span> <i class="fa fa-shopping-cart"></i> </a>
+        </div>
+    </div>
+</section>
 {% endblock content %}

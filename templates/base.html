@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    {% url 'home' as home %} {% url 'configuration' as configuration %} {% url 'login' as login %} {% url 'register' as register %} {% block nav %}
+    {% url 'products:home' as home %} {% url 'products:store' as store %} {% url 'configuration' as configuration %} {% url 'login' as login %} {% url 'register' as register %} {% block nav %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <a class="navbar-brand rounded bg-white" href="#">
             <img src="{% static './images/logo.png' %}" width="80" height="65" alt="Logo">
@@ -31,8 +31,11 @@
                     ">
                     <a class="nav-link " href="{{home}}"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Tienda</a>
+                <li class="nav-item 
+                 {% ifequal request.path store  %} 
+                    active
+                 {% endifequal %} ">
+                    <a class="nav-link" href="{{store}}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Tienda</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Novedades</a>
@@ -62,7 +65,7 @@
                 {% if user.is_authenticated %}
                 <ul class="navbar-nav  mr-lg-5">
 
-                    <li class=" dropdown">
+                    <li class=" dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navOptions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Menu
               </a>
