@@ -47,14 +47,22 @@ class SearchProductView(ListView):
 
 
     def get_queryset(self):
-        search = self.request.GET['search']
-        queryset = Product.objects.filter(Q(title__icontains=search) | Q(category_products__title__icontains=search))
-        
+        try:
+            search = self.request.GET.get('search')
+            queryset = Product.objects.filter(Q(title__icontains=search) | Q(category_products__title__icontains=search))
+        except Exception:
+            min = self.request.GET.get('min')
+            max = self.request.GET.get('max')
+            queryset = Product.objects.filter(Q(price__gte=min) & Q(price__lte=max))
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["query"] = self.request.GET['search'] 
+        try:
+            context["query"] = self.request.GET['search']
+        except: 
+            pass
+
         context['categories'] = Category.objects.all()
         return context
     

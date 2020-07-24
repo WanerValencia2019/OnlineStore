@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 <hr>
 <div class="row d-flex  mt-4">
 
@@ -18,3 +18,7 @@
 </div>
 
 {% endblock content %}
+<HR></HR>
+{% block js %}
+<script src="{% static './js/app.js' %}"></script>
+{% endblock js %}

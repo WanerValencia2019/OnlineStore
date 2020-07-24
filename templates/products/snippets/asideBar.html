@@ -31,25 +31,27 @@
         <article class="filter-group">
             <header class="card-header">
                 <a href="#" data-toggle="collapse" data-target="#collapse_aside2" aria-expanded="true" class="d-flex justify-content-between">
-                    <h6 class="title">Price </h6>
+                    <h6 class="title">Precio </h6>
                     <i class="icon-control fa fa-chevron-down"></i>
                 </a>
             </header>
             <div class="filter-content collapse show" id="collapse_aside2" style="">
+              <form action="{% url 'products:search' %}" method="GET">
                 <div class="card-body">
-                    <input type="range" class="custom-range" min="0" max="100" name="">
+                    <input type="range" id="range" class="custom-range" min="0" max="100" >
                     <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label>Min</label>
-                      <input class="form-control" placeholder="$0" type="number">
+                      <label>Mínimo</label>
+                      <input id="min-value"  name='min' class="form-control" placeholder="$0"  type="number">
                     </div>
                     <div class="form-group text-right col-md-6">
-                      <label>Max</label>
-                      <input class="form-control" placeholder="$1,0000" type="number">
+                      <label>Máximo</label>
+                      <input id="max-value" name='max' class="form-control" placeholder="$80,0000" type="number">
                     </div>
                     </div> <!-- form-row.// -->
-                    <button class="btn btn-block btn-primary">Apply</button>
+                    <button type="submit" class="btn btn-block btn-primary">Aplicar</button>
                 </div> <!-- card-body.// -->
+              </form>
             </div>
         </article> <!-- filter-group  .// -->
         <article class="filter-group">
