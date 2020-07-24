@@ -18,7 +18,7 @@ class LoginView(View):
 	def get(self,request,*args,**kwargs):
 		if request.user.is_authenticated:
 			messages.success(request,f'Bienvenido de nuevo a ChoquiFood {request.user.first_name} {request.user.last_name}')
-			return redirect('configuration')
+			return redirect('home')
 
 		return render(request,self.template_name)
 
@@ -51,8 +51,9 @@ class RegisterView(View):
 		form = self.form_class(request.POST)
 	
 		if (form.is_valid()):
-			form.save()
-			return redirect(reverse_lazy('login'))
+			USER = form.save()
+			login(request,USER)
+			return redirect('home')
 		#print(form.errors)
 		return render(request,self.template_name,{'form':form})
 

@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model,login,authenticate
 
 UserModel = get_user_model()
 
@@ -54,6 +54,9 @@ class RegisterForm(forms.Form):
         instance = UserModel(username=username,email=email,first_name=first_name,last_name=last_name)
         instance.set_password(password)
         instance.save()
+
+        return instance
+
 
         
     def clean_username(self):
