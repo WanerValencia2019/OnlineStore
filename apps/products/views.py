@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 from django.db.models import Q
+
 from apps.category.models import Category
+
 
 from .models import Product
 # Create your views here.
