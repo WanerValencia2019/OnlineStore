@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block content %}
+<hr>
+<div class="row d-flex mt-4">
+
+    <div class="col-lg-3 col-sm-12">
+        {% include "products/snippets/asideBar.html" %}
+    </div>
+    <section class=" col-lg-9 container">
+        <div class="d-flex justify-content-center">
+            {% include "products/snippets/search.html" with query=query %}
+        </div>
+        <hr>
+        <div class="row d-flex justify-content-start ">
+            {% include 'products/snippets/cardProduct.html' with products=products %}
+        </div>
+    </section>
+
+</div>
+
+{% endblock content %}
