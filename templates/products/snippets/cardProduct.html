@@ -1,0 +1,15 @@
+{% for p in products %}
+<div class="card col-lg-3 shadow col-md-4 col-sm-6 mr-3 mb-2" style="width: 20rem;">
+    <img class="card-img-top" src="{{p.image.url}}" alt="Card image cap">
+    <div class="mb-2">
+        <a href='{{p.get_absolute_url}}' class="card-title card-link">{{p.title}}</a>
+        <div class="">
+            <i class="font-weight-bold">${{p.price}}</i>
+        </div>
+    </div>
+    <div class="mb-1">
+        <a href="#" class="btn btn-sm btn-outline-primary float-right">Agregar al carrito <i class="fa fa-shopping-cart"></i></a>
+    </div>
+</div>
+</article>
+{% endfor %}
