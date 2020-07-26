@@ -18,7 +18,7 @@ class LoginView(View):
 	def get(self,request,*args,**kwargs):
 		if request.user.is_authenticated:
 			messages.success(request,f'Bienvenido de nuevo a ChoquiFood {request.user.first_name} {request.user.last_name}')
-			return redirect('home')
+			return redirect('products:home')
 
 		return render(request,self.template_name)
 
@@ -30,7 +30,7 @@ class LoginView(View):
 		if USER:
 			print(login(request,USER))
 			messages.success(request,f'Bienvenido a ChoquiFood  {USER.first_name} {USER.last_name}')
-			return redirect('home')
+			return redirect('products:home')
 		
 		return render(request,self.template_name,{'erros':'Los credenciales son incorrectos'})
 
@@ -43,7 +43,7 @@ class RegisterView(View):
 
 	def get(self,request,*args, **kwargs):
 		if request.user.is_authenticated:
-			return redirect('home')
+			return redirect('products:home')
 
 		return render(request,self.template_name,{'form':self.form_class})
 
@@ -53,7 +53,7 @@ class RegisterView(View):
 		if (form.is_valid()):
 			USER = form.save()
 			login(request,USER)
-			return redirect('home')
+			return redirect('products:home')
 		#print(form.errors)
 		return render(request,self.template_name,{'form':form})
 
