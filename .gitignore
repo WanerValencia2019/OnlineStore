@@ -4,4 +4,8 @@ apps/products/__pycache__/
 apps/products/migrations/
 apps/users/__pycache__/
 apps/users/migrations/
+apps/category/migrations/
+apps/category/__pycache__/
+apps/carts/migrations/
+apps/carts/__pycache__/
 store/__pycache__/

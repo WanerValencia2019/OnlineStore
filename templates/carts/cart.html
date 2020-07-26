@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+<head>{% block styles %}
+    <style>
+        html,
+        body {
+            background-color: rgb(255, 254, 252) !important;
+        }
+    </style>
+
+    {% endblock styles %}</head>
+{% block content %}
+
+<h2 class="display-4 ml-5">Carrito de compras</h2>
+
+{% if cart.cart_products %}
+<li>
+    productos
+</li>
+{% else %}
+<p class="h5 text-info text-center">No hay productos agregados a tu carrito</p>
+{% endif %} {% endblock content %}
