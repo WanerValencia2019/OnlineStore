@@ -64,41 +64,37 @@
             <div class="mr-lg-5">
                 {% if user.is_authenticated %}
                 <ul class="navbar-nav  mr-lg-5">
+                    <li class="nav-item">
+                        <a class="nav-link text-white badge badge-pill bg-primary" style="font-size: medium; " href="{% url 'carts:cart' %}">Mi Carrito<i class="fa fa-shopping-cart " aria-hidden="true "></i></a>
+                    </li>
 
-                    <li class=" dropdown active">
-                        <a class="nav-link dropdown-toggle" href="#" id="navOptions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class=" dropdown active ">
+                        <a class="nav-link dropdown-toggle " href="# " id="navOptions " role="button " data-toggle="dropdown " aria-haspopup="true " aria-expanded="false ">
                 Menu
               </a>
-                        <div class="dropdown-menu" aria-labelledby="navOptions">
-                            <a class="dropdown-item 
-                            {% ifequal  request.path configuration %} 
-                                active
-                            {% endifequal %}
-                                " href="{{configuration}}"><i class="fa fa-cog text-black-50" aria-hidden="true"></i> Configuración</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
+                        <div class="dropdown-menu " aria-labelledby="navOptions ">
+                            <a class="dropdown-item {% ifequal request.path configuration %} active {% endifequal %} " href="{{configuration}} "><i class="fa fa-cog text-black-50 " aria-hidden="true "></i> Configuración</a>
+                            <a class="dropdown-item " href="# ">Another action</a>
+                            <div class="dropdown-divider "></div>
 
 
-                            <a class="dropdown-item d-flex text-danger" href={% url 'logout' %} aria-disabled="true"><i class="fa fa-power-off p-1 text-center" aria-hidden="true"><span class="ml-1">Cerrar Sesión</span></i></a>
+                            <a class="dropdown-item d-flex text-danger " href={% url 'logout' %} aria-disabled="true "><i class="fa fa-power-off p-1 text-center " aria-hidden="true "><span class="ml-1 ">Cerrar Sesión</span></i></a>
 
                         </div>
                     </li>
                 </ul>
                 {% else %}
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link 
-                    {% ifequal request.path login  %} 
-                        active
-                    {% endifequal %}
-                        " href="{{login}}"><i class="fa fa-user"> <span class="ml-1"> Iniciar sesión</span></i></a>
+                <ul class="navbar-nav ">
+                    <li class="nav-item ">
+                        <a class="nav-link text-white badge badge-pill bg-primary " style="font-size: medium; " href="{% url 'carts:cart' %}">Mi Carrito<i class="fa fa-shopping-cart " aria-hidden="true "> 5</i></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link
-                    {% ifequal request.path register  %} 
-                        active
-                    {% endifequal %}" href="{{register}}"><i class="fa fa-user"> <span class="ml-1">Registrarme</span></i></a>
+                    <li class="nav-item ">
+                        <a class="nav-link {% ifequal request.path login %} active {% endifequal %} " href="{{login}} "><i class="fa fa-user "> <span class="ml-1 "> Iniciar sesión</span></i></a>
                     </li>
+                    <li class="nav-item ">
+                        <a class="nav-link {% ifequal request.path register %} active {% endifequal %} " href="{{register}} "><i class="fa fa-user "> <span class="ml-1 ">Registrarme</span></i></a>
+                    </li>
+
                 </ul>
                 {% endif %}
 
@@ -107,18 +103,18 @@
     </nav>
 
     {% endblock nav %} {% if messages %} {% for msg in messages %}
-    <div class="alert {% ifequal msg.level_tag 'success' %} alert-success {% else %} alert-danger {% endifequal %}" role="alert">
+    <div class="alert {% ifequal msg.level_tag 'success' %} alert-success {% else %} alert-danger {% endifequal %} " role="alert ">
         {{msg.message}}
-        <button class="close" data-dismiss="alert">
+        <button class="close " data-dismiss="alert ">
 			&times;
 		</button>
     </div>
     {% endfor %} {% endif %} {% block aside %} {% endblock aside %} {% block content %} {% endblock content %}
 
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="{% static './js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static './js/bootstrap.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js " integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script>
+    <script src="{% static './js/bootstrap.bundle.min.js' %} "></script>
+    <script src="{% static './js/bootstrap.min.js' %} "></script>
     {% block js %} {% endblock js %}
 </body>
 

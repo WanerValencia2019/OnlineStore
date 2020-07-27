@@ -3,7 +3,7 @@ from django.views.generic import ListView,DetailView
 from django.db.models import Q
 
 from apps.category.models import Category
-
+from apps.carts.models import Cart
 
 from .models import Product
 # Create your views here.

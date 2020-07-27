@@ -17,8 +17,16 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.cart_id
+        return "{}".format(self.cart_id)
+    
+    @property
+    def select_related(self):
+        return self.cartproducts_set.select_related('product')
 
+    @property
+    def countProducts(self):
+        return self.cartproducts_set.select_related('product').count()
+        
 @receiver(pre_save,sender=Cart)
 
 def set_cart_id(instance,*args, **kwargs):
@@ -33,4 +41,4 @@ class CartProducts(models.Model):
 
 
     def __str__(self):
-        return self.cart
+        return "{}".format(self.cart.cart_id)

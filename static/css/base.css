@@ -6,3 +6,8 @@
 body {
     background: #3f3f3fd0 !important;
 }
+
+.img-sm {
+    width: 80px;
+    height: 80px;
+}
