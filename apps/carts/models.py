@@ -3,6 +3,9 @@ from django.db import models
 from django.db.models.signals import pre_save, m2m_changed
 from django.dispatch import receiver
 from django.contrib.auth import get_user_model
+
+
+
 from apps.products.models import Product
 # Create your models here.
 
@@ -27,10 +30,10 @@ class Cart(models.Model):
     def countProducts(self):
         return self.cartproducts_set.select_related('product').count()
 
-   
 
 
 @receiver(pre_save,sender=Cart)
+
 def set_cart_id(instance,*args, **kwargs):
     if not instance.cart_id:
         instance.cart_id = str(uuid.uuid4())
@@ -44,3 +47,4 @@ class CartProducts(models.Model):
 
     def __str__(self):
         return "{}".format(self.cart.cart_id)
+
