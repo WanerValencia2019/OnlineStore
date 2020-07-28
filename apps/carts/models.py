@@ -26,7 +26,7 @@ class Cart(models.Model):
     @property
     def countProducts(self):
         return self.cartproducts_set.select_related('product').count()
-        
+
    
 
 
