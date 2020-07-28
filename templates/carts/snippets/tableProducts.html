@@ -19,7 +19,7 @@
                                 <figure class="itemside align-items-center">
                                     <div class="aside"><img src="{{product.image.url}}" class="img-sm"></div>
                                     <figcaption class="info">
-                                        <a href="#" class="title text-dark">{{product.title}}</a>
+                                        <a href="{{product.get_absolute_url}}" class="title text-dark">{{product.title}}</a>
                                         <p class="text-muted small text-truncate w-25">{{product.description}}</p>
                                     </figcaption>
                                 </figure>
@@ -84,11 +84,11 @@
                 </dl>
                 <dl class="d-flex justify-content-between">
                     <dt>Descuento:</dt>
-                    <dd class="text-right text-danger">- $10.00</dd>
+                    <dd class="text-right text-danger">-${{cart.get_discount}}</dd>
                 </dl>
                 <dl class="d-flex justify-content-between">
                     <dt>Total a pagar:</dt>
-                    <dd class="text-right text-dark b"><strong>${{cart.subtotal}}</strong></dd>
+                    <dd class="text-right text-dark b"><strong>${{cart.total}}</strong></dd>
                 </dl>
                 <hr>
                 <p class="text-center mb-3">

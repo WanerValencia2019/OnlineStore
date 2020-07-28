@@ -103,9 +103,9 @@
     </nav>
 
     {% endblock nav %} {% if messages %} {% for msg in messages %}
-    <div class="alert {% ifequal msg.level_tag 'success' %} alert-success {% else %} alert-danger {% endifequal %} " role="alert ">
+    <div class="alert {% ifequal msg.level_tag 'success' %} alert-success {% else %} alert-danger {% endifequal %} " data-toggle="alert" role="alert">
         {{msg.message}}
-        <button class="close " data-dismiss="alert ">
+        <button class="close" data-dismiss="alert">
 			&times;
 		</button>
     </div>
