@@ -8,7 +8,11 @@
         </div>
     </div>
     <div class="mb-1">
-        <a href="#" class="btn btn-sm btn-outline-primary float-right">Agregar al carrito <i class="fa fa-shopping-cart"></i></a>
+        <form action="{% url 'carts:addProduct' %}" method="POST">
+            {% csrf_token %}
+            <input type="text" class="d-none" name='id' value="{{p.id}}">
+            <button class="btn ml-3 type='submit' btn-outline-primary float-right"> <span class="text">Agregar al carrito</span> <i class="fa fa-cart-plus"></i> </button>
+        </form>
     </div>
 </div>
 </article>

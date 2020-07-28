@@ -29,10 +29,46 @@
                 {{product.description}}
             </span>
         </div>
-        <div class="row d-flex p-3 align-self-end">
-            <a href="#" class="btn  btn-primary"> Comprar </a>
-            <a href="#" class="btn ml-3  btn-outline-primary"> <span class="text">Agregar al carrito</span> <i class="fa fa-shopping-cart"></i> </a>
-        </div>
+        <form class="container d-flex flex-column" action="{% url 'carts:addProduct' %}" method="POST">
+            {% csrf_token %}
+            <div class="ml-0 ml-0 p-0  w-50">
+                <div class="form-group col-md flex-grow-0 ">
+                    <label class="font-weight-bold">Cantidad</label>
+                    <div class="input-group mb-3 input-spinner">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-info" type="button" id="button-plus"> + </button>
+                        </div>
+                        <input type="text" class="form-control   text-center" name="quantity" id="quantity">
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="button" id="button-minus"> − </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex  align-self-end">
+                <a href="#" class="btn  btn-primary"> Comprar </a>
+                <input type="text" class="d-none" name='id' value="{{product.id}}">
+                <button class="btn ml-3 type='submit' btn-outline-primary"> <span class="text">Agregar al carrito</span> <i class="fa fa-cart-plus"></i> </button>
+            </div>
+        </form>
     </div>
 </section>
-{% endblock content %}
+{% endblock content %} {% block js %}
+<script type="text/javascript">
+    const plus = document.getElementById('button-plus');
+    const minus = document.getElementById('button-minus');
+    const quantity = document.getElementById('quantity');
+
+    quantity.value = 1;
+
+    plus.addEventListener('click', (e) => {
+        const value = Number(quantity.value);
+        quantity.value = value + 1;
+    })
+    minus.addEventListener('click', (e) => {
+        const value = Number(quantity.value);
+        value != 1 ? quantity.value = value - 1 : quantity.value = value;
+    })
+</script>
+
+{% endblock js %}

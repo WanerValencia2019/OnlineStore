@@ -11,12 +11,9 @@
     {% endblock styles %}</head>
 {% block content %}
 
-<h2 class="display-4 ml-5">Carrito de compras</h2>
-
-{% if cart.cart_products %}
-<li>
-    productos
-</li>
-{% else %}
-<p class="h5 text-info text-center">No hay productos agregados a tu carrito</p>
-{% endif %} {% endblock content %}
+<div class="overflow-hidden ml-3 mr-3">
+    <h2 class="display-4 ml-5">Carrito de compras</h2>
+    {% if cart.select_related %} {% include "carts/snippets/tableProducts.html" with list_product=cart.select_related cart=cart %} {% else %}
+    <p class="h5 text-info text-center">No hay productos agregados a tu carrito</p>
+</div>
+{% endblock content %}
