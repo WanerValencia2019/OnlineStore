@@ -27,6 +27,9 @@ class Cart(models.Model):
     def countProducts(self):
         return self.cartproducts_set.select_related('product').count()
         
+   
+
+
 @receiver(pre_save,sender=Cart)
 
 def set_cart_id(instance,*args, **kwargs):
