@@ -31,7 +31,6 @@ class Cart(models.Model):
 
 
 @receiver(pre_save,sender=Cart)
-
 def set_cart_id(instance,*args, **kwargs):
     if not instance.cart_id:
         instance.cart_id = str(uuid.uuid4())
