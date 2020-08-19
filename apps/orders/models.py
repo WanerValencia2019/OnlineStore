@@ -1,4 +1,5 @@
 from enum import Enum
+from decimal import Decimal
 from uuid import uuid4
 
 from django.db import models
@@ -21,7 +22,7 @@ choices = [(tag, tag.value) for tag in OrderStatus]
 
 
 class Order(models.Model):
-    order_id = models.CharField(max_length=150,null=False,blank=False)
+    order_id = models.CharField(max_length=150,null=False,blank=False,unique=True)
     user = models.ForeignKey(UserModel,on_delete=models.CASCADE,verbose_name='Usuario')
     cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
     status = models.CharField(max_length=50,choices=choices,default=OrderStatus.CREATED)
@@ -30,8 +31,12 @@ class Order(models.Model):
 
     @property
     def total_to_pay(self):
-        self.total = self.cart.total + self.shipping_total
+        total = Decimal(Decimal(self.cart.total) + Decimal(self.shipping_total))
+        self.total = total.quantize(Decimal(1.000))
         self.save()
+
+    def __str__(self):
+        return self.order_id
 
 @receiver(pre_save,sender=Order)
 def set_order_id(instance,*args, **kwargs):

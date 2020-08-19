@@ -15,10 +15,13 @@ UserModel = get_user_model()
 class LoginView(View):
 	template_name='users/login.html'
 
+
 	def get(self,request,*args,**kwargs):
+		print(request.GET)
 		if request.user.is_authenticated:
 			messages.success(request,f'Bienvenido de nuevo a ChoquiFood {request.user.first_name} {request.user.last_name}')
 			return redirect('products:home')
+
 
 		return render(request,self.template_name)
 
@@ -26,14 +29,19 @@ class LoginView(View):
 		username=request.POST['username'] 
 		password=request.POST['password']
 		USER = authenticate(request,username=username,password=password)
-
 		if USER:
-			print(login(request,USER))
+			login(request,USER)
 			messages.success(request,f'Bienvenido a ChoquiFood  {USER.first_name} {USER.last_name}')
+			print(request.GET.get('next'))
+			if request.GET.get('next'):
+				return redirect(request.GET.get('next'))
 			return redirect('products:home')
 		
 		return render(request,self.template_name,{'erros':'Los credenciales son incorrectos'})
-
+		
+	def redirect(self):
+		print(self.kwargs)
+		return redirect('')
 class RegisterView(View):
 	model = UserModel
 	form_class = RegisterForm

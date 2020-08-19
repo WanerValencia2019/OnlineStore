@@ -39,6 +39,8 @@ class Cart(models.Model):
     def updatePrice(self):
         self.updateSubtotal()
         self.updateTotal()
+        if self.order_set.first():
+            self.order_set.first().total_to_pay
 
     def updateSubtotal(self):
         self.subtotal = sum([(c.product.price * c.quantity)  for c in self.cartproducts_set.select_related('product')])
@@ -73,14 +75,16 @@ def set_cart_id(instance,*args, **kwargs):
     if not instance.cart_id:
         instance.cart_id = str(uuid.uuid4())
 
+
 @receiver(pre_save,sender=CartProducts)
 def updatePrice(instance,*args, **kwargs):
     instance.price = instance.product.price * instance.quantity
-    print(instance.price)
+    
     
 @receiver(post_save,sender=CartProducts)
 def updateQuantity(instance,*args, **kwargs):
     instance.cart.updatePrice()
+   
     
 
 @receiver(m2m_changed,sender=Cart.products.through)
