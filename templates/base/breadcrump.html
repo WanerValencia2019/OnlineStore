@@ -1,9 +1,18 @@
+{% url 'orders:create' as orders %} {% url 'shipping_adress:list' as shipping_adress %} 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active " aria-current="page"><a class="text-black-50" href="{% url 'orders:create' %}">Resumen del pedido</a></li>
-        <li class="breadcrumb-item"><a class="" href="{% url 'shipping_adress:list' %}">Dirección</a></li>
-        <li class="breadcrumb-item "><a class="" href="#">Forma de pago</a></li>
-        <li class="breadcrumb-item "><a class="" href="#">Forma de pago</a></li>
-        <li class="breadcrumb-item "><a class="" href="#">Forma de pago</a></li>
+        <li class="breadcrumb-item  " aria-current="page"><a class="
+            {% ifnotequal request.path orders  %} 
+              text-black-50
+            {% endifnotequal %}
+            " href="{% url 'orders:create' %}">Resumen del pedido</a></li>
+        <li class="breadcrumb-item active"><a class="
+        {% ifnotequal request.path shipping_adress  %} 
+            text-black-50
+        {% endifnotequal %}
+            " href="{% url 'shipping_adress:list' %}">Dirección</a></li>
+        <li class="breadcrumb-item active"><a class="text-black-50" href="#">Forma de pago</a></li>
+        <li class="breadcrumb-item active"><a class="text-black-50" href="#">Forma de pago</a></li>
+        <li class="breadcrumb-item active"><a class="text-black-50" href="#">Forma</a></li>
     </ol>
 </nav>

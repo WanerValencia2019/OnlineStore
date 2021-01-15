@@ -28,7 +28,7 @@ class Order(models.Model):
     status = models.CharField(max_length=50,choices=choices,default=OrderStatus.CREATED)
     shipping_total = models.DecimalField(max_digits=6,decimal_places=2,default=5500.0)
     total = models.DecimalField(max_digits=10,decimal_places=2,default=0.0)
-
+    
     @property
     def total_to_pay(self):
         total = Decimal(Decimal(self.cart.total) + Decimal(self.shipping_total))

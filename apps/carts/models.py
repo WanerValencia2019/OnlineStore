@@ -53,7 +53,11 @@ class Cart(models.Model):
     def get_discount(self):
         discount = self.subtotal * decimal.Decimal(self.DISCOUNT)
         return discount.quantize(decimal.Decimal('1.00'))
-
+    
+    @property
+    def order(self):
+        return self.order_set.first()
+        
 
 
 class CartProducts(models.Model):

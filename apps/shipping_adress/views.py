@@ -3,14 +3,18 @@ from django.views.generic import ListView, CreateView, FormView,UpdateView
 from django.views import View 
 from django.views.decorators.http import require_POST
 from .models import ShippingAdress
+from django.contrib.auth.mixins import LoginRequiredMixin
 from . import forms
 # Create your views here.
 
-class Home(ListView):
+class Home(LoginRequiredMixin, ListView):
+    login_url = '/account/login/'
     template_name='shipping_adress/list.html'
     context_object_name = 'shipping_adress'
     model =ShippingAdress
-    queryset =ShippingAdress.objects.all().order_by('-default')
+    queryset = ShippingAdress.objects.all().order_by('-default')
+
+
 
 class Create(FormView):
     form_class = forms.ShippingAdressForm
