@@ -40,3 +40,19 @@ def stablish_adress(request):
         
     order.update_shipping_adress(shipping_adress)
     return redirect(reverse_lazy('orders:adress'))
+
+def confirm_order(request):
+    cart = get_or_create_cart(request)
+    order = get_or_create_order(request,cart)
+
+    shipping_adress = order.shipping_adress
+
+    if shipping_adress is None:
+        return redirect(reverse_lazy('orders:adress'))
+
+
+    return render(request,'orders/confirm.html',{
+        'cart':cart,
+        'order':order,
+        'shipping_adress':shipping_adress
+        })
