@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
-    {% include "base/breadcrump.html" %}
-</div>
 <section class="container bg-white mt-4 rounded p-4">
 
 <div class="d-flex flex-row justify-content-between mb-3">
 <h4 class="text-center font-weight-bold">Mis direcciones</h4>
 <a href="{% url 'shipping_adress:create' %}" class="ml-1 btn btn-primary">Añadir una nueva dirección</a> 
+
 </div>
     {% include "shipping_adress/snippets/listAdress.html" with shipping_adress=shipping_adress %}
 </section>

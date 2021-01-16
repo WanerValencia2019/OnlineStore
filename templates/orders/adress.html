@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block content %}
+<div>
+    {% include "base/breadcrump.html" %}
+</div>
+<section class="container bg-white mt-4 rounded p-4">
+
+<div class="d-flex flex-row justify-content-between mb-3">
+<h4 class="text-center font-weight-bold">Dirección</h4>
+
+{% if  shipping_adress is None %}
+    {% url 'orders:adress' as next_url %}
+    <a href="{% url 'shipping_adress:create' %}?next={{next_url}}" class="ml-1 btn btn-primary">Añadir una nueva dirección</a> 
+{% endif %}
+
+</div>
+
+{% if shipping_adress %}
+<h5>Tu pedido será entregado en la dirección establecidad, en un periodo máximo de <span class="text-danger">  2 horas</span> </h4>
+  
+ {% with shipping_adress as adress  %}
+ <article class="card">
+    <div class="card-header text-uppercase font-italic font-weight-bold">
+        Dirección seleccionada
+    </div>
+    <div class="card-body">
+        <div class="d-flex flex-row ">
+            <div class="col-6">
+                <p><span class="font-weight-bold">País: </span>{{adress.country}}</p>
+                <p><span class="font-weight-bold">Departamento: </span>{{adress.state}}</p>
+                <p><span class="font-weight-bold">Ciudad: </span>{{adress.city}}</p>
+                <p><span class="font-weight-bold">Código postal: </span>{{adress.postal_code}}</p>
+            </div>
+            <div class="col-6">
+                <p><span class="font-weight-bold">Carrera: </span>{{adress.line1}}</p>
+                <p><span class="font-weight-bold">Calle: </span>{{adress.line2}}</p>
+                <p><span class="font-weight-bold">Referencia: </span>{{adress.reference}}</p>                
+            </div>
+        </div>
+    </div>
+</article>
+   
+ {% endwith %}
+ <a href="{% url 'orders:select_adress' %}" class="">Elegir una dirección distinta</a>
+    
+{% endif %}
+    
+
+
+
+
+</section>
+{% endblock content %}

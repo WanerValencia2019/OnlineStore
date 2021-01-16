@@ -1,4 +1,5 @@
 from django.shortcuts import render, reverse, redirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, FormView,UpdateView
 from django.views import View 
 from django.views.decorators.http import require_POST
@@ -24,10 +25,18 @@ class Create(FormView):
     def get(self,request,*args, **kwargs):
         form=self.get_form_class()(initial={'user':request.user.id})
         return render(request,self.get_template_names(),{'form':form})
+
     
     def post(self,request,*args, **kwargs):
         form=self.get_form_class()(request.POST) 
+
         if form.is_valid():
+            if request.GET.get('next'):
+                if request.GET.get('next') == reverse_lazy('orders:adress'):
+                    adress=form.save(commit=False)
+                    adress.default = True
+                    adress.save()
+                    return redirect(request.GET.get('next'))
             form.save()
             return redirect(self.get_success_url())
         return super().get(request,args,kwargs)
