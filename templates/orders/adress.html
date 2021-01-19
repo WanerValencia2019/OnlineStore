@@ -38,7 +38,9 @@
         </div>
     </div>
 </article>
-   
+<div class="mt-1 mb-2">
+    <a href="{% url 'orders:confirm' %}" class="btn btn-warning">Confirmar dirección</a>
+</div>
  {% endwith %}
  <a href="{% url 'orders:select_adress' %}" class="">Elegir una dirección distinta</a>
     
