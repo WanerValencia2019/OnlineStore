@@ -1,7 +1,9 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
+
 from .views import create, adress, select_adress, stablish_adress, confirm_order_view, cancel_order, complete_order
+
 
 app_name = 'orders'
 
@@ -13,4 +15,5 @@ urlpatterns = [
     path('confirm',login_required(confirm_order_view,login_url='login'),name='confirm'),
     path('cancel',login_required(cancel_order,login_url='login'),name='cancel'),
     path('complete',login_required(complete_order,login_url='login'),name='complete'),
+
 ]
