@@ -68,18 +68,15 @@
                         <a class="nav-link text-white badge badge-pill bg-primary" style="font-size: medium; " href="{% url 'carts:cart' %}">Mi Carrito<i class="fa fa-shopping-cart " aria-hidden="true "></i></a>
                     </li>
 
-                    <li class=" dropdown active ">
-                        <a class="nav-link dropdown-toggle " href="# " id="navOptions " role="button " data-toggle="dropdown " aria-haspopup="true " aria-expanded="false ">
+                    <li class=" dropdown active">
+                        <a class="nav-link dropdown-toggle" href="#" id="navOptions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Menu
               </a>
-                        <div class="dropdown-menu " aria-labelledby="navOptions ">
+                        <div class="dropdown-menu" aria-labelledby="navOptions">
                             <a class="dropdown-item {% ifequal request.path configuration %} active {% endifequal %} " href="{{configuration}} "><i class="fa fa-cog text-black-50 " aria-hidden="true "></i> Configuración</a>
                             <a class="dropdown-item " href="# ">Another action</a>
                             <div class="dropdown-divider "></div>
-
-
                             <a class="dropdown-item d-flex text-danger " href={% url 'logout' %} aria-disabled="true "><i class="fa fa-power-off p-1 text-center " aria-hidden="true "><span class="ml-1 ">Cerrar Sesión</span></i></a>
-
                         </div>
                     </li>
                 </ul>
