@@ -1,0 +1,72 @@
+<section class="container">
+    {% for adress in shipping_adress  %}
+      {% if adress.default == True %}
+        <div class="d-flex justify-content-center">
+            <article class="card bg-info   w-50">
+                <div class="card-header text-uppercase font-italic font-weight-bold">
+                    Dirección principal
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-row ">
+                        <div class="col-6">
+                            <p><span class="font-weight-bold">País: </span>{{adress.country}}</p>
+                            <p><span class="font-weight-bold">Departamento: </span>{{adress.state}}</p>
+                            <p><span class="font-weight-bold">Ciudad: </span>{{adress.city}}</p>
+                            <p><span class="font-weight-bold">Código postal: </span>{{adress.postal_code}}</p>
+                        </div>
+                        <div class="col-6">
+                            <p><span class="font-weight-bold">Carrera: </span>{{adress.line1}}</p>
+                            <p><span class="font-weight-bold">Calle: </span>{{adress.line2}}</p>
+                            <p><span class="font-weight-bold">Referencia: </span>{{adress.reference}}</p>                
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <hr>
+      {% endif %}     
+    {% endfor %}
+    <div class="d-flex row justify-content-between">
+    {% for adress in  shipping_adress %}
+      {% if adress.default == False %}
+        <article class="card col-6 ml-n2 mt-2" style="background-color: blanchedalmond;">
+            <div class="card-body">
+                <div class="d-flex flex-row ">
+                    <div class="col-6">
+                        <p><span class="font-weight-bold">País: </span>{{adress.country}}</p>
+                        <p><span class="font-weight-bold">Departamento: </span>{{adress.state}}</p>
+                        <p><span class="font-weight-bold">Ciudad: </span>{{adress.city}}</p>
+                        <p><span class="font-weight-bold">Código postal: </span>{{adress.postal_code}}</p>
+                    </div>
+                    <div class="col-6">
+                        <p><span class="font-weight-bold">Carrera: </span>{{adress.line1}}</p>
+                        <p><span class="font-weight-bold">Calle: </span>{{adress.line2}}</p>
+                        <p><span class="font-weight-bold">Referencia: </span>{{adress.reference}}</p>                
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <form action="{% url 'shipping_adress:default' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{adress.pk}}" name="id">
+                        <button type="submit" class="btn btn-warning">Establecer como dirección principal</button>
+                    </form>
+                    <div class="d-flex flex-row"> 
+                    <a href="{% url 'shipping_adress:edit' pk=adress.pk %}" class="btn btn-outline-primary btn-lg border-0"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                    <form action="{% url 'shipping_adress:delete' %}" class="ml-1" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{adress.pk}}" name="id">
+                        <button type="submit" class="btn btn-outline-danger btn-lg border-0"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </article>  
+      {% endif %}
+          
+    {% endfor %}
+</div>  
+</section>
+
+

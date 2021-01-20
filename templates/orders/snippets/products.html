@@ -1,0 +1,27 @@
+<div class="col-8 card">
+<table class="table table-striped table-borderless table-responsive-sm">
+        <thead class="text-muted">
+            <tr>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cp in cart.cartproducts_set.all %}
+            <tr>
+                <td>
+                    <figure class="itemside align-items-center">
+                        <div class="aside"><img src="{{cp.product.image.url}}" class="img-sm"></div>
+                        <figcaption class="info">
+                            <a href="{{cp.product.get_absolute_url}}" class="title  text-dark">{{cp.product.title}}</a>
+                        </figcaption>
+                    </figure>
+                </td>
+                <td>{{cp.quantity}}</td>
+                <td>${{cp.price}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

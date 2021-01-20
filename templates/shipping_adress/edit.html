@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<section class="container bg-white mt-4 rounded mb-2">
+<h4 class="font-weight-bold text-center">Actualizar dirección</h4>
+<form action="" method="post">
+    {% csrf_token %}
+{{form.as_p}}
+<div class="d-flex justify-content-center">
+    <button class="btn btn-lg btn-success mb-4">Actualizar</button>
+</div>
+</form>
+</section>
+{% endblock content %}

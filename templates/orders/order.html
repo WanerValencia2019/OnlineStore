@@ -1,16 +1,11 @@
 {% extends "base.html" %} {% block content %}
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active " aria-current="page"><a class="text-black-50" href="#">Resumen del pedido</a></li>
-        <li class="breadcrumb-item"><a class="" href="#">Dirección</a></li>
-        <li class="breadcrumb-item "><a class="" href="#">Forma de pago</a></li>
-        <li class="breadcrumb-item "><a class="" href="#">Forma de pago</a></li>
-        <li class="breadcrumb-item "><a class="" href="#">Forma de pago</a></li>
-    </ol>
-</nav>
 
-<div class="container">
-    <div class="row">
+<div>
+    {% include "base/breadcrump.html" %}
+</div>
+<div class="container ">
+    <div class="row ml-1 mb-1">
+
         {% include 'orders/snippets/reviewCart.html' with cart=order.cart order=order %}
     </div>
 </div>

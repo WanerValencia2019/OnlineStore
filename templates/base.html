@@ -106,10 +106,11 @@
 			&times;
 		</button>
     </div>
-    {% endfor %} {% endif %} {% block aside %} {% endblock aside %} {% block content %} {% endblock content %}
+    {% endfor %} {% endif %}
+   {% block aside %} {% endblock aside %} {% block content %} {% endblock content %}
 
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js " integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script>
+   	<script src="{% static './js/jqueryV3_5_1.js' %}"></script> 
     <script src="{% static './js/bootstrap.bundle.min.js' %} "></script>
     <script src="{% static './js/bootstrap.min.js' %} "></script>
     {% block js %} {% endblock js %}

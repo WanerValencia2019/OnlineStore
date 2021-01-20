@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    {% include "base/breadcrump.html" %}
+</div>
+
+<section class="container bg-white mt-4 rounded p-4">
+  <h4>Confirmar pedido</h4>
+  <div class="container-fluid row">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+        <div class="d-flex flex-row justify-content-between">
+            <div class="col-6">
+                <p><span class="font-weight-bold">País: </span>{{shipping_adress.country}}</p>
+                <p><span class="font-weight-bold">Departamento: </span>{{shipping_adress.state}}</p>
+                <p><span class="font-weight-bold">Ciudad: </span>{{shipping_adress.city}}</p>
+                <p><span class="font-weight-bold">Código postal: </span>{{shipping_adress.postal_code}}</p>
+            </div>
+            <div class="col-6">
+                <p><span class="font-weight-bold">Carrera: </span>{{shipping_adress.line1}}</p>
+                <p><span class="font-weight-bold">Calle: </span>{{shipping_adress.line2}}</p>
+                <p><span class="font-weight-bold">Referencia: </span>{{shipping_adress.reference}}</p>                
+            </div>
+        </div>
+    </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <section class="card">
+        <div class="card-body row">
+          <article class="col-4">
+            <p class="font-weight-bold">Método de pago</p>
+            <span>Tarjeta: *******46302</span>
+          </article>
+          <article class="col-8">
+            
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label>Tienes un cupon?</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="" placeholder="Coupon code">
+                            <span class="input-group-append">
+        <button class="btn btn-primary">Aplicar</button>
+      </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="container-fluid mt-2">
+    {% include "orders/snippets/products.html" with cart=cart %}
+  </div>
+</section>
+  
+{% endblock content %}

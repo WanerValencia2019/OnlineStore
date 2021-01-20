@@ -12,4 +12,3 @@ class CartProductsManager(Manager):
         except:
             created = self.create(cart=cart,product=product,quantity=quantity)
             return created
-
