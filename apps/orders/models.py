@@ -56,7 +56,20 @@ class Order(models.Model):
 
     def update_shipping_adress(self, shipping_adress):
         self.shipping_adress = shipping_adress
-        self.save()        
+
+        self.save()
+
+    def cancel(self):
+        self.status = OrderStatus.CANCELED
+        self.save()
+
+        return True        
+
+    def complete(self):
+        self.status = OrderStatus.COMPLETED
+        self.save()
+
+        return True 
 
 
 @receiver(pre_save,sender=Order)

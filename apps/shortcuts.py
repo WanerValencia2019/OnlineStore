@@ -32,5 +32,12 @@ def get_or_create_order(request,cart):
     request.session['order_id'] = order.order_id
 
     return order
-    
+
+
+def destroy_cart(request):
+    request.session['cart_id'] = None    
+
+def destroy_order(request):
+    request.session['order_id'] = None
+
 

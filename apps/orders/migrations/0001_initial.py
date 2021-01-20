@@ -14,7 +14,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-
         ('carts', '0001_initial'),
 
     ]
@@ -24,7 +23,6 @@ class Migration(migrations.Migration):
             name='Order',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-
                 ('order_id', models.CharField(max_length=150, unique=True)),
 
                 ('status', models.CharField(choices=[(apps.orders.models.OrderStatus['CREATED'], 'CREATED'), (apps.orders.models.OrderStatus['PAYED'], 'PAYED'), (apps.orders.models.OrderStatus['COMPLETED'], 'COMPLETED'), (apps.orders.models.OrderStatus['CANCELED'], 'CANCELED')], default=apps.orders.models.OrderStatus['CREATED'], max_length=50)),
