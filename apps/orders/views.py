@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
@@ -56,3 +57,4 @@ def confirm_order(request):
         'order':order,
         'shipping_adress':shipping_adress
         })
+

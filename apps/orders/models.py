@@ -9,7 +9,9 @@ from django.contrib.auth import get_user_model
 # Create your models here.
 
 from apps.carts.models import Cart
+
 from apps.shipping_adress.models import ShippingAdress 
+
 UserModel = get_user_model()
 
 class OrderStatus(Enum):
@@ -30,6 +32,7 @@ class Order(models.Model):
     total = models.DecimalField(max_digits=10,decimal_places=2,default=0.0)
     shipping_adress = models.ForeignKey(ShippingAdress, null=True, blank=True, on_delete=models.CASCADE)
 
+
     @property
     def total_to_pay(self):
         total = Decimal(Decimal(self.cart.total) + Decimal(self.shipping_total))
@@ -38,6 +41,7 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_id
+
 
     def get_or_create_shipping_adress(self):
         if self.shipping_adress:
@@ -53,6 +57,7 @@ class Order(models.Model):
     def update_shipping_adress(self, shipping_adress):
         self.shipping_adress = shipping_adress
         self.save()        
+
 
 @receiver(pre_save,sender=Order)
 def set_order_id(instance,*args, **kwargs):
