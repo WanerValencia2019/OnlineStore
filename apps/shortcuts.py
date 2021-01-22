@@ -1,6 +1,5 @@
 from apps.carts.models import Cart
 from apps.orders.models import Order
-
 from django.db import IntegrityError
 
 def get_or_create_cart(request):
@@ -27,17 +26,17 @@ def get_or_create_order(request,cart):
     order = cart.order
 
     if order is None and user.is_authenticated:
-        order =  Order.objects.create(user=user,cart=cart)                
+        order =  Order(user=user)
+        order.cart = cart
+        order.save()                
 
     request.session['order_id'] = order.order_id
 
     return order
-
 
 def destroy_cart(request):
     request.session['cart_id'] = None    
 
 def destroy_order(request):
     request.session['order_id'] = None
-
 
