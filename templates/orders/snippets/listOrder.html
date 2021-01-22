@@ -1,0 +1,55 @@
+ {% if orders %}
+
+<div class="" style="border:1px solid black">
+    {% for order in orders %}
+    <div class="container-fluid mt-3">
+        <button class="btn   border-0  rounded-0 w-100 text-left text-dark d-flex justify-content-between" type="button" data-toggle="collapse" data-target="#collapse{{order.id}}" aria-expanded="false" aria-controls="collapse{{order.id}}">  
+      <span class="card-title font-weight-bold">{{order.created_at}}</span>
+      <span class="text-danger">${{order.total}}</span>
+      <span><span>{{order.shipping_adress.city}}- {{order.shipping_adress.state}} - {{order.shipping_adress.country}}  </span></span>
+    <i class="fa fa-arrow-down text-black-50" aria-hidden="true"></i>
+</button>
+        <div class="collapse mb-2" id="collapse{{order.id}}">
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-8">
+                        {% include "orders/snippets/products.html" with cart=order.cart %}
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <h4> Resumen del pedido</h4>
+
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-weight-bold">Metodo de pago</span> <span>Tarjeta</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-weight-bold">N°</span> <span>**********3242</span>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-weight-bold">Subtotal</span> <span>${{order.cart.total}}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span class="font-weight-bold">Envio</span> <span>${{order.shipping_total}}</span>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-end">
+                                    <span class="text-danger text-right font-weight-bold">Total(IVA incluido) {{order.total}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if forloop.last %} {% else %}
+    <hr style="background-color:black;"> {% endif %} {% endfor %}
+</div>
+{% else %}
+
+<h4>No has realizado pedidos</h4>
+
+{% endif %}
