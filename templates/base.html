@@ -84,11 +84,15 @@
                 Menu
               </a>
                         <div class="dropdown-menu" aria-labelledby="navOptions">
+
                             <a class="dropdown-item " href="{% url 'shipping_adress:list' %}"><i class="fa fa-location-arrow text-black-50 "></i> Direcciones</a>
                             <a class="dropdown-item " href="{% url 'orders:list' %}"><i class="fa fa-shipping-fast text-black-50"></i> Pedidos</a>
+
                             <a class="dropdown-item {% ifequal request.path configuration %} active {% endifequal %} " href="{{configuration}} "><i class="fa fa-cog text-black-50 " aria-hidden="true "></i> Configuración</a>
                             <div class="dropdown-divider "></div>
+
                             <a class="dropdown-item d-flex justify-content-around text-danger" href={% url 'logout' %} aria-disabled="true "><i class="fa fa-power-off" aria-hidden="true "></i><span class="ml-1 mb-2">Cerrar Sesión</span></a>
+
                         </div>
                     </li>
                 </ul>
@@ -118,7 +122,9 @@
 			&times;
 		</button>
     </div>
-    {% endfor %} {% endif %} {% block aside %} {% endblock aside %} {% block content %} {% endblock content %}
+    {% endfor %} {% endif %}
+   {% block aside %} {% endblock aside %} {% block content %} {% endblock content %}
+
 
 
     <script src="{% static './js/jqueryV3_5_1.js' %}"></script>

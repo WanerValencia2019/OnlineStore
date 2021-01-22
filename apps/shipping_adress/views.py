@@ -20,7 +20,6 @@ class Home(LoginRequiredMixin, ListView):
         return queryset
 
 
-
 class Create(FormView):
     form_class = forms.ShippingAdressForm
     success_url = '/shipping_adress'

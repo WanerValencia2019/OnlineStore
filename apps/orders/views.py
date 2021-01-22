@@ -1,7 +1,9 @@
+
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST, require_GET
+
 from django.contrib import messages
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -23,6 +25,7 @@ def create(request, cart, order):
     return render(request,'orders/order.html',{'order':order})
 
 
+
 @validate_cart_order
 def adress(request, cart, order):
 
@@ -37,10 +40,10 @@ def select_adress(request):
 
     return render(request,'orders/select_adress.html', {'adresses': adresses}) 
 
+
 @validate_cart_order
 def stablish_adress(request, cart, order):
     adress_id = request.POST.get('id')
-
     shipping_adress = get_object_or_404(ShippingAdress,pk=adress_id)
 
     if request.user.id != shipping_adress.user.id:
@@ -48,6 +51,7 @@ def stablish_adress(request, cart, order):
         
     order.update_shipping_adress(shipping_adress)
     return redirect(reverse_lazy('orders:adress'))
+
 
 @require_GET
 @validate_cart_order
@@ -65,9 +69,11 @@ def confirm_order_view(request, cart, order):
         'shipping_adress':shipping_adress
         })
 
+
 @require_POST
 @validate_cart_order
 def cancel_order(request, cart, order):
+
     canceled = order.cancel()
 
     if canceled:
@@ -92,6 +98,7 @@ def complete_order(request, cart, order):
             user, order
         ))
         thread.start()
+
         destroy_order(request)
         destroy_cart(request)
         messages.success(request,'Compra realizada exítosamente')
@@ -109,3 +116,4 @@ class ListOrders(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = Order.objects.filter(user__id=self.request.user.id)
         return queryset
+
