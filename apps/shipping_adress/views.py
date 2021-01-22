@@ -15,6 +15,10 @@ class Home(LoginRequiredMixin, ListView):
     model =ShippingAdress
     queryset = ShippingAdress.objects.all().order_by('-default')
 
+    def get_queryset(self):
+        queryset = ShippingAdress.objects.filter(user__id=self.request.user.id).order_by('-default')
+        return queryset
+
 
 
 class Create(FormView):

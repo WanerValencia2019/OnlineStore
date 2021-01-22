@@ -14,3 +14,4 @@ range.addEventListener('change', (e) => {
     let max_price = (range.value / 100) * MAXIMO
     max.value = max_price
 })
+

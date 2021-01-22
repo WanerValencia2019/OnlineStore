@@ -29,7 +29,7 @@ class Order(models.Model):
     shipping_total = models.DecimalField(max_digits=6,decimal_places=2,default=5500.0)
     total = models.DecimalField(max_digits=10,decimal_places=2,default=0.0)
     shipping_adress = models.ForeignKey(ShippingAdress, null=True, blank=True, on_delete=models.CASCADE)
-
+    created_at = models.DateTimeField(verbose_name='Fecha de creación', auto_now_add=True,null=True, blank=True)
     @property
     def total_to_pay(self):
         total = Decimal(Decimal(self.cart.total) + Decimal(self.shipping_total))

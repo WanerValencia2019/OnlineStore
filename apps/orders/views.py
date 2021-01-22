@@ -3,24 +3,28 @@ from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST, require_GET
 from django.contrib import messages
+from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from apps.shortcuts import get_or_create_cart,get_or_create_order, destroy_cart, destroy_order
+from threading import Thread
+
+from apps.shortcuts import destroy_cart, destroy_order
+from .decorators import validate_cart_order
 from .mail import Mail
 # Create your views here.
 
-
 from apps.shipping_adress.models import ShippingAdress
-def create(request):
-    cart = get_or_create_cart(request)
-    order = get_or_create_order(request,cart)
+from .models import Order
+
+@validate_cart_order
+def create(request, cart, order):
     #print(order)
 
     return render(request,'orders/order.html',{'order':order})
 
 
-def adress(request):
-    cart = get_or_create_cart(request)
-    order = get_or_create_order(request,cart)
+@validate_cart_order
+def adress(request, cart, order):
 
     shipping_adress = order.get_or_create_shipping_adress()
 
@@ -33,10 +37,9 @@ def select_adress(request):
 
     return render(request,'orders/select_adress.html', {'adresses': adresses}) 
 
-def stablish_adress(request):
+@validate_cart_order
+def stablish_adress(request, cart, order):
     adress_id = request.POST.get('id')
-    cart = get_or_create_cart(request)
-    order = get_or_create_order(request,cart)
 
     shipping_adress = get_object_or_404(ShippingAdress,pk=adress_id)
 
@@ -47,9 +50,8 @@ def stablish_adress(request):
     return redirect(reverse_lazy('orders:adress'))
 
 @require_GET
-def confirm_order_view(request):
-    cart = get_or_create_cart(request)
-    order = get_or_create_order(request,cart)
+@validate_cart_order
+def confirm_order_view(request, cart, order):
 
     shipping_adress = order.shipping_adress
 
@@ -64,10 +66,8 @@ def confirm_order_view(request):
         })
 
 @require_POST
-def cancel_order(request):
-    cart = get_or_create_cart(request)
-    order = get_or_create_order(request,cart)
-
+@validate_cart_order
+def cancel_order(request, cart, order):
     canceled = order.cancel()
 
     if canceled:
@@ -77,10 +77,10 @@ def cancel_order(request):
 
     return redirect(reverse_lazy('orders:confirm'))
 
+
 @require_POST
-def complete_order(request):
-    cart = get_or_create_cart(request)
-    order = get_or_create_order(request,cart)
+@validate_cart_order
+def complete_order(request, cart, order):
     user = request.user
     if user.id != order.user.id:
         return redirect(reverse_lazy('carts:cart'))
@@ -88,7 +88,10 @@ def complete_order(request):
     completed = order.complete()
 
     if completed:
-        Mail.send_complete_order(user, order)
+        thread = Thread(target=Mail.send_complete_order, args=(
+            user, order
+        ))
+        thread.start()
         destroy_order(request)
         destroy_cart(request)
         messages.success(request,'Compra realizada exítosamente')
@@ -97,3 +100,12 @@ def complete_order(request):
     return redirect(reverse_lazy('carts:cart'))
 
 
+class ListOrders(LoginRequiredMixin, ListView):
+    login_url = 'account/login'
+    queryset = Order.objects.all()
+    template_name = 'orders/list.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        queryset = Order.objects.filter(user__id=self.request.user.id)
+        return queryset

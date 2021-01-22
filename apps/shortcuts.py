@@ -26,7 +26,9 @@ def get_or_create_order(request,cart):
     order = cart.order
 
     if order is None and user.is_authenticated:
-        order =  Order.objects.create(user=user,cart=cart)                
+        order =  Order(user=user)
+        order.cart = cart
+        order.save()                
 
     request.session['order_id'] = order.order_id
 
