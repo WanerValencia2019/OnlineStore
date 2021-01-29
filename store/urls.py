@@ -25,6 +25,8 @@ urlpatterns = [
     path('cart/',include('apps.carts.urls'),name='carts'),
     path('order/',include('apps.orders.urls'),name='order'),
     path('shipping_adress/',include('apps.shipping_adress.urls'),name='shipping_adress'),
+    path('promo_codes/',include('apps.promo_codes.urls'),name='promo_codes'),
+    path('billing_profiles/',include('apps.billing_profiles.urls'),name='billing_profiles'),
 ]
 
 if settings.DEBUG:

@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'apps.category',
     'apps.carts',
     'apps.orders',
-    'apps.shipping_adress'
+    'apps.shipping_adress',
+    'apps.promo_codes',
+    'apps.billing_profiles'
 ]
 
 MIDDLEWARE = [
@@ -148,3 +150,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
+
+
+STRIPE_PUBLIC_KEY=config('STRIPE_PUBLIC_KEY')
+STRIPE_PRIVATE_KEY=config('STRIPE_PRIVATE_KEY')

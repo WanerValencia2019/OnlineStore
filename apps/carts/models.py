@@ -9,6 +9,7 @@ from django.contrib.auth import get_user_model
 
 from .managers import CartProductsManager
 from apps.products.models import Product
+from apps.promo_codes.models import PromoCodes
 # Create your models here.
 
 UserModel = get_user_model()
@@ -20,9 +21,10 @@ class Cart(models.Model):
     products = models.ManyToManyField(Product,related_name='cart_products',through='CartProducts')
     subtotal =  models.DecimalField(max_digits=10,decimal_places=2,default=0.0)
     total = models.DecimalField(max_digits=10,decimal_places=2,default=0.0)
+    promoCode = models.OneToOneField(PromoCodes,on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    DISCOUNT = 0.3
+    DISCOUNT = 0.0
 
     def __str__(self):
         return "{}".format(self.cart_id)
@@ -46,14 +48,23 @@ class Cart(models.Model):
         self.subtotal = sum([(c.product.price * c.quantity)  for c in self.cartproducts_set.select_related('product')])
         self.save()
 
+    def apply_code_promo(self, promo_code):
+        if self.promoCode is None:
+            self.promoCode = promo_code
+            self.save()
+    
+
+            self.updateTotal()
+            promo_code.setUsed()
 
     def updateTotal(self):
-        self.total = self.subtotal - self.get_discount()
+        self.total = self.subtotal - self.get_discount() 
         self.save()
 
     def get_discount(self):
-        discount = self.subtotal * decimal.Decimal(self.DISCOUNT)
+        discount = self.subtotal * decimal.Decimal(self.DISCOUNT) +  (decimal.Decimal(self.promoCode.discount) if self.promoCode else decimal.Decimal(0))
         return discount.quantize(decimal.Decimal('1.00'))
+        return decimal.Decimal(0.0)
     
     @property
     def order(self):
