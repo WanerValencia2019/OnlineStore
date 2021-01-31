@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block content %}
+<section class="container bg-white mt-4 rounded p-4">
+    <div class="d-flex flex-row justify-content-between mb-3">
+        <h4 class="text-left font-weight-bold">Mis métodos de pago</h4>
+        <a href="{% url 'billing_profiles:create' %}" class="ml-1 btn btn-primary">Añadir un nuevo método de pago</a>
+    </div>
+    </div>
+    {% include "billing_profiles/snippets/listCards.html" with billing_profiles=billing_profiles %}
+</section>
+
+</section>
+{% endblock content %}

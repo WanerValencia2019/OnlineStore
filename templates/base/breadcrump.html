@@ -1,4 +1,6 @@
-{% url 'orders:create' as orders %} {% url 'orders:adress' as shipping_adress %} {% url 'orders:select_adress' as select_adress %} {% url 'orders:confirm' as confirm %}
+{% url 'orders:create' as orders %} {% url 'orders:adress' as shipping_adress %} {% url 'orders:select_adress' as select_adress %} {% url 'orders:confirm' as confirm %} {% url 'orders:billing_profile' as billing_profile %} 
+
+{% url 'orders:select_billing_profile' as select_billing_profile %}
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item  " aria-current="page"><a class="" href="{% url 'orders:create' %}">Resumen del pedido</a></li>
@@ -6,12 +8,23 @@
         {% ifnotequal request.path shipping_adress  %} 
             {% ifnotequal request.path select_adress %}
                 {% ifnotequal request.path confirm %}
-                text-black-50
+                {% ifnotequal request.path billing_profile  %}
+                    {% ifnotequal request.path select_billing_profile  %}
+                        text-black-50
+                    {% endifnotequal %}
+                {% endifnotequal %}
             {% endifnotequal %}
             {% endifnotequal %}
         {% endifnotequal %}
             " href="{% url 'orders:adress' %}">Dirección</a></li>
-        <li class="breadcrumb-item active"><a class="text-black-50" href="#">Forma de pago</a></li>
+        <li class="breadcrumb-item active"><a class="
+            {% ifnotequal request.path billing_profile %}
+            {% ifnotequal request.path confirm  %} 
+                {% ifnotequal request.path select_billing_profile  %}
+                    text-black-50
+                {% endifnotequal %}
+            {% endifnotequal %}
+        {% endifnotequal %}" href="{{billing_profile}}">Forma de pago</a></li>
         <li class="breadcrumb-item active"><a class="
             {% ifnotequal request.path confirm  %} 
                         text-black-50

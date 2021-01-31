@@ -1,5 +1,6 @@
 __pycache__/
 .env
+db.sqlite3
 apps/products/__pycache__/
 apps/products/migrations/
 apps/users/__pycache__/

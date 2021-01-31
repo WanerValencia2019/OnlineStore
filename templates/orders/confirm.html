@@ -8,7 +8,7 @@
 <section class="container  mt-4 rounded p-4" style="background-color: whitesmoke">
   <h4>Confirmar pedido</h4>
   <div class="row ml-1 mb-1">
-        {% include 'orders/snippets/confirm_orden.html' with cart=order.cart order=order %}
+        {% include 'orders/snippets/confirm_orden.html' with cart=order.cart order=order billing_profile=billing_profile %}
   </div>
 </section>
   

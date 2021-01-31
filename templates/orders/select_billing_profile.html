@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block content %}
+<div>
+    {% include "base/breadcrump.html" %}
+</div>
+
+<section class="container bg-white mt-4 rounded p-4">
+    <h4>Selecciona un metódo de pago</h4>
+
+    <div class="d-flex row justify-content-between">
+        {% for billing in billing_profiles %}
+        <article class="card col-6 ml-n2 mt-2" style="background-color: blanchedalmond;">
+            <div class="card-body">
+                <div class="d-flex flex-row ">
+                    <div class="">
+                        <span class="font-weight-bold">{{billing.brand}}</span>
+                        <p>**** **** **** {{billing.last4}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <form action="{% url 'orders:stablish_billing_profile' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{billing.pk}}" name="id">
+                        <button type="submit" class="btn btn-warning">Seleccionar</button>
+                    </form>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock content %}

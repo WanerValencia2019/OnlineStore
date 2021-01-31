@@ -1,0 +1,49 @@
+<section class="container">
+    {% for billing in billing_profiles %} {% if billing.default == True %}
+    <div class="d-flex justify-content-center">
+        <article class="card bg-info   w-50">
+            <div class="card-header text-uppercase font-italic font-weight-bold">
+                Metódo de pago principal
+            </div>
+            <div class="card-body">
+                <div class="d-flex flex-row ">
+                    <div class="">
+                        <span class="font-weight-bold">{{billing.brand}}</span>
+                        <p>*************{{billing.last4}}</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+    <hr> {% endif %} {% endfor %}
+    <div class="d-flex row justify-content-between">
+        {% for billing in billing_profiles %} {% if billing.default == False %}
+        <article class="card col-6 ml-n2 mt-2" style="background-color: blanchedalmond;">
+            <div class="card-body">
+                <div class="d-flex flex-row ">
+                    <div class="">
+                        <span class="font-weight-bold">{{billing.brand}}</span>
+                        <p>**** **** **** {{billing.last4}}</p>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between">
+                        <form action="{% url 'billing_profiles:default' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{billing.pk}}" name="id">
+                            <button type="submit" class="btn btn-warning">Establecer por defecto</button>
+                        </form>
+                        <div class="d-flex flex-row">
+                            <form action="{% url 'billing_profiles:delete' %}" class="ml-1" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{billing.pk}}" name="id">
+                                <button type="submit" class="btn btn-outline-danger btn-lg border-0"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </article>
+        {% endif %} {% endfor %}
+        </div>
+</section>

@@ -1,0 +1,26 @@
+{% extends "base.html"%} {% block styles %}
+
+<link rel=stylesheet href="/static/css/stripe.css"> {% endblock styles %} {% block content %}
+
+<section class="container bg-white p-5 mt-2 rounded">
+    <div>
+        <form class="form" method="post" action="{% url 'billing_profiles:create' %}" id="payment-form">
+            {% csrf_token %}
+            <h3 class="font-weight-bold">Nuevo método de pago</h3>
+            <div class="sr-form-row">
+                <div class="sr-input sr-element sr-card-element" id="card-element">
+                    <!-- A Stripe card Element will be inserted here. -->
+                </div>
+            </div>
+            <div class="sr-field-error" id="card-errors" role="alert"></div>
+            <button type="submit" class="btn btn-success w-50">
+	            <div class="spinner hidden" id="spinner"></div>
+	            <span id="button-text" >Agregar nueva tarjeta</span>
+	    </button>
+        </form>
+    </div>
+</section>
+{% endblock content %} {% block js %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/static/js/stripe.js"></script>
+{% endblock js %}

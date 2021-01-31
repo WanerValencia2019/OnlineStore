@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}
+<div>
+    {% include "base/breadcrump.html" %}
+</div>
+<section class="container bg-white mt-4 rounded p-4">
+
+    <div class="d-flex flex-row justify-content-between mb-3">
+        <h4 class="text-center font-weight-bold">Metódo de pago</h4>
+
+        {% if shipping_adress is None %} {% url 'orders:adress' as next_url %}
+        <a href="{% url 'billing_profiles:create' %}?next={{next_url}}" class="ml-1 btn btn-primary">Añadir un nuevo metódo de pago </a> {% endif %}
+
+    </div>
+
+    {% if billing_profile %} {% with billing_profile as billing %}
+    <article class="card">
+        <div class="card-header text-uppercase font-italic font-weight-bold">
+            Tarjeta Seleccionada
+        </div>
+        <div class="card-body">
+            <div class="d-flex flex-row ">
+                <div class="">
+                    <span class="font-weight-bold">{{billing.brand}}</span>
+                    <p>**** **** **** {{billing.last4}}</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <div class="mt-1 mb-2">
+        <a href="{% url 'orders:confirm' %}" class="btn btn-warning">Confirmar dirección</a>
+    </div>
+
+    {% endwith %}
+    <a href="{% url 'orders:select_billing_profile' %}" class="">Elegir una dirección distinta</a> {% endif %}
+
+
+
+
+
+</section>
+{% endblock content %}

@@ -17,10 +17,13 @@ from .mail import Mail
 
 from apps.shipping_adress.models import ShippingAdress
 from .models import Order
+from apps.billing_profiles.models import BillingProfiles
 
 @validate_cart_order
 def create(request, cart, order):
     #print(order)
+    if cart.products.all().count() == 0:
+        return redirect('/')
 
     return render(request,'orders/order.html',{'order':order})
 
@@ -28,6 +31,9 @@ def create(request, cart, order):
 
 @validate_cart_order
 def adress(request, cart, order):
+
+    if cart.products.all().count() == 0:
+        return redirect('/')
 
     shipping_adress = order.get_or_create_shipping_adress()
 
@@ -53,20 +59,61 @@ def stablish_adress(request, cart, order):
     return redirect(reverse_lazy('orders:adress'))
 
 
+@validate_cart_order
+def billing_profile(request, cart, order):
+
+    if cart.products.all().count() == 0:
+        return redirect('/')
+
+    billing_profile = order.get_or_create_billing_profile()
+
+    print(billing_profile)
+
+    return render(request,'orders/billing_profile.html',{'billing_profile':billing_profile})
+
+def select_billing_profile(request):
+
+    if cart.products.all().count() == 0:
+        return redirect('/')
+
+    billing_profiles = request.user.billingprofiles_set.all()
+
+    return render(request,'orders/select_billing_profile.html', {'billing_profiles': billing_profiles}) 
+
+
+@validate_cart_order
+def stablish_billing_profile(request, cart, order):
+    billing_id = request.POST.get('id')
+    billing_profile = get_object_or_404(BillingProfiles,pk=billing_id)
+
+    if request.user.id != billing_profile.user.id:
+        return redirect('/')
+        
+    order.update_billing_profile(billing_profile)
+    
+    return redirect(reverse_lazy('orders:billing_profile'))
+
 @require_GET
 @validate_cart_order
 def confirm_order_view(request, cart, order):
 
+    if cart.products.all().count() == 0:
+        return redirect('/')
+
     shipping_adress = order.shipping_adress
+    billing_profile = order.billing_profile
 
     if shipping_adress is None:
         return redirect(reverse_lazy('orders:adress'))
 
+    if billing_profile is None:
+        return redirect(reverse_lazy('orders:billing_profile'))
 
     return render(request,'orders/confirm.html',{
         'cart':cart,
         'order':order,
-        'shipping_adress':shipping_adress
+        'shipping_adress':shipping_adress,
+        'billing_profile':billing_profile
         })
 
 

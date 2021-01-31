@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 from apps.carts.models import Cart
 
 from apps.shipping_adress.models import ShippingAdress 
-
+from apps.billing_profiles.models import BillingProfiles
 UserModel = get_user_model()
 
 class OrderStatus(Enum):
@@ -31,8 +31,15 @@ class Order(models.Model):
     shipping_total = models.DecimalField(max_digits=6,decimal_places=2,default=5500.0)
     total = models.DecimalField(max_digits=10,decimal_places=2,default=0.0)
     shipping_adress = models.ForeignKey(ShippingAdress, null=True, blank=True, on_delete=models.CASCADE)
-
+    billing_profile = models.ForeignKey(BillingProfiles, null=True, blank=True, on_delete=models.CASCADE)
     created_at = models.DateTimeField(verbose_name='Fecha de creación', auto_now_add=True,null=True, blank=True)
+
+    class Meta:
+        db_table = ''
+        managed = True
+        verbose_name = 'Orden de compra'
+        verbose_name_plural = 'Orden de compras'
+
     @property
     def total_to_pay(self):
         total = Decimal(Decimal(self.cart.total) + Decimal(self.shipping_total))
@@ -55,8 +62,23 @@ class Order(models.Model):
 
     def update_shipping_adress(self, shipping_adress):
         self.shipping_adress = shipping_adress
-
         self.save()
+
+    def get_or_create_billing_profile(self):
+        if self.billing_profile:
+            return self.billing_profile
+
+        billing_profile = self.user.billing_profile
+    
+        if billing_profile:
+            self.update_billing_profile(billing_profile)
+
+        return billing_profile
+
+    def update_billing_profile(self, billing_profile):
+        self.billing_profile = billing_profile
+        self.save()
+    
 
     def cancel(self):
         self.status = OrderStatus.CANCELED
