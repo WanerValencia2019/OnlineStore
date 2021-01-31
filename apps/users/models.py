@@ -23,4 +23,8 @@ class CustomUser(AbstractUser):
     def shipping_adress(self):
         return self.shippingadress_set.filter(default=True).first()
 
+    @property
+    def billing_profile(self):
+        return self.billingprofiles_set.filter(default=True).first()
+        
 # Create your models here.

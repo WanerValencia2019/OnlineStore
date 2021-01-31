@@ -23,8 +23,11 @@ class Cart(models.Model):
     total = models.DecimalField(max_digits=10,decimal_places=2,default=0.0)
     promoCode = models.OneToOneField(PromoCodes,on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
     DISCOUNT = 0.0
+
+    class Meta:  
+        verbose_name = 'Carrito de compra'
+        verbose_name_plural = 'Carrito de compras'
 
     def __str__(self):
         return "{}".format(self.cart_id)
@@ -85,6 +88,9 @@ class CartProducts(models.Model):
 
     def __str__(self):
         return "{}".format(self.cart.cart_id)
+    class Meta:
+        verbose_name = 'Producto del carrito'
+        verbose_name_plural = 'Productos del carrito'
 
 
 
