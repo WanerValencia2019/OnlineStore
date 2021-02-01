@@ -15,6 +15,8 @@ apps/shipping_adress/migrations/
 apps/shipping_adress/__pycache__/
 apps/billing_profiles/migrations/
 apps/billing_profiles/__pycache__/
+apps/billing_charges/migrations/
+apps/billing_charges/__pycache__/
 apps/promo_codes/migrations/
 apps/promo_codes/__pycache__/
 store/__pycache__/
