@@ -31,5 +31,7 @@ Developed with Django Python framework
       - billing_charges
       - ***finally excute***
         - `` python manage.py migrate ``
+   - #### Create super user
+      - ``python manage.py createsuperuser``   
    - #### Run server
      - ``python manage.py runserver 127.0.0.1:8000``
