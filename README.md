@@ -13,8 +13,8 @@ Developed with Django Python framework
       - ``source env/bin/activate``
 
   - #### Install requirements or dependencies
-    - ``pip install -r requirements.txt``
     - ``cd nameProject``
+    - ``pip install -r requirements.txt``
   - #### Build migrations
     - Example: 
       - `` python manage.py  makemigrations appName``
@@ -31,5 +31,15 @@ Developed with Django Python framework
       - billing_charges
       - ***finally excute***
         - `` python manage.py migrate ``
+   - #### Create super user
+      - ``python manage.py createsuperuser``   
    - #### Run server
      - ``python manage.py runserver 127.0.0.1:8000``
+## Configuration
+  - #### Create a file with name ``.env``
+    - This file must contain, the following properties: ***Example***
+      - SECRET_KEY= &e_#wg+qa_7tx_9m)09rs$%6&kw38umd&q0xni9*5lb*rbg62l
+      - EMAIL_HOST_USER = correo@gmail.com
+      - EMAIL_HOST_PASSWORD = contraseña
+      - STRIPE_PUBLIC_KEY= key public for stripe
+      - STRIPE_PRIVATE_KEY=key private for stripe
