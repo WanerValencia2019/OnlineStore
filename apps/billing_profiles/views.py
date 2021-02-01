@@ -22,9 +22,15 @@ class Create(LoginRequiredMixin,View):
 		data = request.POST
 		if data['stripeToken']:
 			request.user.create_customer_id()
-			BillingProfiles.objects.create_by_stripe_token(request.user,data['stripeToken'])
-			messages.add_message(request, messages.SUCCESS, "Tarjeta agrega correctamente")
-			
+			billing = BillingProfiles.objects.create_by_stripe_token(request.user,data['stripeToken'])
+			if billing:
+				messages.add_message(request, messages.SUCCESS, "Tarjeta agregada correctamente")
+				print(request.GET, args, kwargs)
+				if request.GET.get('next'):
+					if request.GET.get('next') == reverse_lazy('orders:billing_profile'):
+						return redirect(request.GET.get('next'))
+			else:
+				messages.add_message(request, messages.ERROR, "Ocurrió un error al momento de agregar la tarjeta")
 		return redirect(reverse_lazy('billing_profiles:list'))
 
 class BillingProfilesList(LoginRequiredMixin,ListView):

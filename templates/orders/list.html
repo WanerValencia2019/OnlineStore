@@ -2,7 +2,7 @@
 <section class="container  mt-2 rounded p-4" style="background-color: whitesmoke">
     <h4 class="text-center">Mis pedidos</h4>
     <div>
-        {% include "orders/snippets/listOrder.html" %}
+        {% include "orders/snippets/listOrder.html" with orders=orders %}
     </div>
 </section>
 {% endblock content %}

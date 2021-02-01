@@ -90,7 +90,7 @@ class Order(models.Model):
         self.status = OrderStatus.COMPLETED
         self.save()
 
-        return True 
+        return True
     @property 
     def description(self):
         return "Compra de {} productos en CHOQUIFOOD".format(self.cart.products.count())

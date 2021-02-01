@@ -31,7 +31,9 @@
 </style>
 
 <body>
-    {% url 'products:home' as home %} {% url 'products:store' as store %} {% url 'configuration' as configuration %} {% url 'login' as login %} {% url 'register' as register %} {% block nav %}
+    {% url 'products:home' as home %} {% url 'products:store' as store %} {% url 'configuration' as configuration %} {% url 'login' as login %} {% url 'register' as register %}
+    {% url 'orders:list' as url_orders %} {% url 'shipping_adress:list' as url_shipping_adress %} {% url 'billing_profiles:list' as url_billing_profiles %}
+    {% block nav %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <a class="navbar-brand rounded bg-white" href="#">
             <img src="{% static './images/logo.png' %}" width="80" height="65" alt="Logo">
@@ -55,9 +57,10 @@
                  {% endifequal %} ">
                     <a class="nav-link" href="{{store}}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Tienda</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Novedades</a>
-                </li>
+                </li> -->
+                <!--
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Dropdown
@@ -69,6 +72,7 @@
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
+                -->
                 <div class="d-none d-lg-block  ml-lg-1 line-vertical"></div>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
@@ -86,15 +90,15 @@
                         <a class="nav-link text-white badge badge-pill bg-primary" style="font-size: medium; " href="{% url 'carts:cart' %}">Mi Carrito<i class="fa fa-shopping-cart " aria-hidden="true "></i></a>
                     </li>
 
-                    <li class=" dropdown active">
+                    <li class=" dropdown active mr-5">
                         <a class="nav-link dropdown-toggle" href="#" id="navOptions" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Menu
               </a>
                         <div class="dropdown-menu" aria-labelledby="navOptions">
 
-                            <a class="dropdown-item " href="{% url 'shipping_adress:list' %}"><i class="fa fa-location-arrow text-black-50 "></i> Direcciones</a>
-                            <a class="dropdown-item " href="{% url 'orders:list' %}"><i class="fa fa-shipping-fast text-black-50"></i> Pedidos</a>
-
+                            <a class="dropdown-item  {% ifequal request.path shipping_adress %} active {% endifequal %}" href="{{url_shipping_adress}}"><i class="fa fa-location-arrow text-black-50 "></i> Direcciones</a>
+                            <a class="dropdown-item  {% ifequal request.path orders %} active {% endifequal %}" href="{{url_orders}}"><i class="fa fa-shipping-fast text-black-50"></i> Pedidos</a>
+                            <a class="dropdown-item  {% ifequal request.path billing_profiles %} active {% endifequal %}" href="{{url_billing_profiles}}"><i class="fa fa-shipping-fast text-black-50"></i> Metódos de pago</a>
                             <a class="dropdown-item {% ifequal request.path configuration %} active {% endifequal %} " href="{{configuration}} "><i class="fa fa-cog text-black-50 " aria-hidden="true "></i> Configuración</a>
                             <div class="dropdown-divider "></div>
 
