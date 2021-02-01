@@ -1,5 +1,5 @@
 # OnlineStore  :strawberry:
-ChoquiFood es una aplicación web, tipo ecommerce, donde podrás encontrar una ampliedad variedad de productos a la disposición, y además con precios muy adsequibles.
+ChoquiFood is a web application, ecommerce type, where you can find a wide variety of products at your disposal, and also with very affordable prices.
 
 Developed with Django Python framework 
 :earth_asia: python-django:books:
