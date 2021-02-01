@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'apps.orders',
     'apps.shipping_adress',
     'apps.promo_codes',
-    'apps.billing_profiles'
+    'apps.billing_profiles',
+    'apps.billing_charges'
 ]
 
 MIDDLEWARE = [

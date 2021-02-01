@@ -14,10 +14,10 @@ from apps.shortcuts import destroy_cart, destroy_order
 from .decorators import validate_cart_order
 from .mail import Mail
 # Create your views here.
-
 from apps.shipping_adress.models import ShippingAdress
 from .models import Order
 from apps.billing_profiles.models import BillingProfiles
+from apps.billing_charges.models import BillingCharge
 
 @validate_cart_order
 def create(request, cart, order):
@@ -138,9 +138,10 @@ def complete_order(request, cart, order):
     if user.id != order.user.id:
         return redirect(reverse_lazy('carts:cart'))
 
-    completed = order.complete()
+    charge = BillingCharge.objects.create_charge(order)
 
-    if completed:
+    if charge:
+        order.complete()
         thread = Thread(target=Mail.send_complete_order, args=(
             user, order
         ))
