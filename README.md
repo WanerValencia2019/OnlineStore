@@ -13,8 +13,8 @@ Developed with Django Python framework
       - ``source env/bin/activate``
 
   - #### Install requirements or dependencies
-    - ``pip install -r requirements.txt``
     - ``cd nameProject``
+    - ``pip install -r requirements.txt``
   - #### Build migrations
     - Example: 
       - `` python manage.py  makemigrations appName``
