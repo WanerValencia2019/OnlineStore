@@ -91,7 +91,9 @@ class Order(models.Model):
         self.save()
 
         return True 
-
+    @property 
+    def description(self):
+        return "Compra de {} productos en CHOQUIFOOD".format(self.cart.products.count())
 
 @receiver(pre_save,sender=Order)
 def set_order_id(instance,*args, **kwargs):
