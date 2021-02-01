@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'apps.shipping_adress',
     'apps.promo_codes',
     'apps.billing_profiles',
-    'apps.billing_charges'
+    'apps.billing_charges',
+    'django_dropbox_storage',
 ]
 
 MIDDLEWARE = [
@@ -155,3 +156,12 @@ EMAIL_USE_TLS = True
 
 STRIPE_PUBLIC_KEY=config('STRIPE_PUBLIC_KEY')
 STRIPE_PRIVATE_KEY=config('STRIPE_PRIVATE_KEY')
+
+# DROPBOX CONFIGURATION
+
+DEFAULT_FILE_STORAGE = 'django_dropbox_storage.storage.DropboxStorage'
+DROPBOX_ACCESS_TOKEN = config('DROPBOX_ACCESS_TOKEN')
+DROPBOX_CONSUMER_KEY=config('DROPBOX_CONSUMER_KEY')
+DROPBOX_CONSUMER_SECRET=config('DROPBOX_CONSUMER_SECRET')
+
+DROPBOX_ROOT_FOLDER="/"
