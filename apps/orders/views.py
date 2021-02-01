@@ -61,8 +61,7 @@ def stablish_adress(request, cart, order):
 
 @validate_cart_order
 def billing_profile(request, cart, order):
-
-    if cart.products.all().count() == 0:
+    if cart.products.all().count() == 0 or order.shipping_adress is None:
         return redirect('/')
 
     billing_profile = order.get_or_create_billing_profile()
@@ -71,13 +70,12 @@ def billing_profile(request, cart, order):
 
     return render(request,'orders/billing_profile.html',{'billing_profile':billing_profile})
 
-def select_billing_profile(request):
-
+@validate_cart_order
+def select_billing_profile(request, cart, order):
     if cart.products.all().count() == 0:
         return redirect('/')
 
     billing_profiles = request.user.billingprofiles_set.all()
-
     return render(request,'orders/select_billing_profile.html', {'billing_profiles': billing_profiles}) 
 
 
@@ -97,8 +95,8 @@ def stablish_billing_profile(request, cart, order):
 @validate_cart_order
 def confirm_order_view(request, cart, order):
 
-    if cart.products.all().count() == 0:
-        return redirect('/')
+    if cart.products.all().count() == 0 or order.shipping_adress is None or order.billing_profile is None:
+        return redirect(reverse_lazy('carts_cart'))
 
     shipping_adress = order.shipping_adress
     billing_profile = order.billing_profile

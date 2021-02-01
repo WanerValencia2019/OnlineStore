@@ -7,7 +7,7 @@
     <div class="d-flex flex-row justify-content-between mb-3">
         <h4 class="text-center font-weight-bold">Metódo de pago</h4>
 
-        {% if shipping_adress is None %} {% url 'orders:adress' as next_url %}
+        {% if billing_profile is None %} {% url 'orders:billing_profile' as next_url %}
         <a href="{% url 'billing_profiles:create' %}?next={{next_url}}" class="ml-1 btn btn-primary">Añadir un nuevo metódo de pago </a> {% endif %}
 
     </div>
