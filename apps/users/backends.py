@@ -9,7 +9,6 @@ UserModel = get_user_model()
 class EmailUsernameBackend(BaseBackend):
     
     def authenticate(self, request, username=None, password=None, **kwargs):
-        print('email and backends custom')
         try:
             user = UserModel.objects.get(Q(username=username) | Q(email=username))
             if user.check_password(password):

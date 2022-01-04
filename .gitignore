@@ -1,5 +1,6 @@
 __pycache__/
 .env
+apps/*/migrations/
 db.sqlite3
 apps/products/__pycache__/
 apps/users/__pycache__/
@@ -12,3 +13,4 @@ apps/billing_profiles/__pycache__/
 apps/billing_charges/__pycache__/
 apps/promo_codes/__pycache__/
 store/__pycache__/
+.idea/

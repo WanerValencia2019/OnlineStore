@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
-
 from django.conf.urls.static import static
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('apps.users.urls'),name='account'),
@@ -27,6 +28,8 @@ urlpatterns = [
     path('shipping_adress/',include('apps.shipping_adress.urls'),name='shipping_adress'),
     path('promo_codes/',include('apps.promo_codes.urls'),name='promo_codes'),
     path('billing_profiles/',include('apps.billing_profiles.urls'),name='billing_profiles'),
+    path('api', include('rest_framework.urls'), name="api-base"),
+    path('api/',include('store.api_routes'), name="api-routes"),
 ]
 
 if settings.DEBUG:
