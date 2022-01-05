@@ -1,16 +1,21 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import pre_save
+
 from stripeAPI import customers
 
 from django.core.mail import EmailMultiAlternatives
 from django.dispatch import receiver
-from django.template.loader import render_to_string, get_template
+from django.template.loader import get_template
 from django.conf import settings
 
 from django_rest_passwordreset.signals import reset_password_token_created
 
 
 class CustomUser(AbstractUser):
+    id = models.CharField(max_length=36, primary_key=True, blank=True)
     email = models.EmailField(verbose_name='Correo electrónico', unique=True)
     customer_id = models.CharField(max_length=100, verbose_name="Customer Stripe ID", blank=True, null=True)
 
@@ -34,6 +39,13 @@ class CustomUser(AbstractUser):
     @property
     def billing_profile(self):
         return self.billingprofiles_set.filter(default=True).first()
+
+
+@receiver(pre_save, sender=CustomUser)
+def set_uuid(instance, *args, **kwargs):
+    if not instance.id:
+        instance.id = uuid.uuid4().hex
+        print(instance.id)
 
 #SIGNAL FOR SEND EMAIL ON RESET PASSWORD(SEND TOKEN)
 @receiver(reset_password_token_created)
